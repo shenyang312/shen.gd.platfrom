@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>shen.gd.platform</groupId>
+		<artifactId>platform</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>shen.gd</groupId>
+	<artifactId>clean-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>clean-service</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
+	</properties>
+
+	<dependencies>
+		<!--核心grpc-spring-boot依赖-->
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-client-spring-boot-starter</artifactId>
+			<version>${net-devh-grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-server-spring-boot-starter</artifactId>
+			<version>${net-devh-grpc.version}</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
