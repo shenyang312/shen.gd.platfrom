@@ -18,7 +18,11 @@
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>shen.gd.platform</groupId>
+			<artifactId>web-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

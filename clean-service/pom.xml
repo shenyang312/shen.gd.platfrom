@@ -19,16 +19,11 @@
 	</properties>
 
 	<dependencies>
-		<!--核心grpc-spring-boot依赖-->
+
 		<dependency>
-			<groupId>net.devh</groupId>
-			<artifactId>grpc-client-spring-boot-starter</artifactId>
-			<version>${net-devh-grpc.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.devh</groupId>
-			<artifactId>grpc-server-spring-boot-starter</artifactId>
-			<version>${net-devh-grpc.version}</version>
+			<groupId>shen.gd.platform</groupId>
+			<artifactId>web-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 
