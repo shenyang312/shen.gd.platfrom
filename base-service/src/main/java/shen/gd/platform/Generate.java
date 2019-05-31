@@ -54,10 +54,10 @@ public class Generate {
 
     public static void main(String[] args)throws Exception {
         String basePackage = "shen.gd.platform";
-        String basePath = "/Users/ks/IdeaProjects/platform/";
-        String entityPath = basePath + "src/main/java/shen/gd/platform/entity/";
-        String mapperPath = basePath + "src/main/java/shen/gd/platform/mapper/";
-        String servicePath = basePath + "src/main/java/shen/gd/platform/service/";
+        String basePath = "/Users/ks/Downloads/tools-journey-master/shen-gd-platform/";
+        String entityPath = basePath + "core-service/src/main/java/shen/gd/platform/entity/";
+        String mapperPath = basePath + "web-service/src/main/java/shen/gd/platform/mapper/";
+        String servicePath = basePath + "web-service/src/main/java/shen/gd/platform/service/";
 //     String basePath = "E:\\workspace\\zmkj-bms-cloud\\";
         generate("localhost", "3306", "goudaner", "root", "sy123456",
                 "gd_order_merch","GdOrderMerch", basePackage, entityPath, mapperPath, servicePath);
