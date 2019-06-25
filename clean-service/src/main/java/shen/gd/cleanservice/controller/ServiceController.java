@@ -19,7 +19,7 @@ public class ServiceController {
      */
     @RequestMapping("/services")
     public Object services() {
-        return discoveryClient.getInstances("service-producer");
+        return discoveryClient.getInstances("service-exhibition");
     }
 
     /**
@@ -27,6 +27,6 @@ public class ServiceController {
      */
     @RequestMapping("/discover")
     public Object discover() {
-        return loadBalancer.choose("service-producer").getUri().toString();
+        return loadBalancer.choose("service-exhibition").getUri().toString();
     }
 }
