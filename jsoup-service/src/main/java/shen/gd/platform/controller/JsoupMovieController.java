@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @RestController
 public class JsoupMovieController {
@@ -38,12 +41,12 @@ public class JsoupMovieController {
     @RequestMapping("jsoupMovie")
     public void jsoupMovie() throws IOException {
         //设置需要下载多少页
-        int page=10;//先爬取10页的内容
-        int result=0;
+        int page = 10;//先爬取10页的内容
+        int result = 0;
         for (int i = 1; i <= page; i++) {
-            result=pachong_page("http://www.dytt8.net/html/gndy/dyzz/list_23_" + i + ".html");
+            result = pachong_page("http://www.dytt8.net/html/gndy/dyzz/list_23_" + i + ".html");
         }
-        System.out.println("爬取结束！一共爬取内容为:"+result*page+"条！");
+        System.out.println("爬取结束！一共爬取内容为:" + result * page + "条！");
     }
 
 
@@ -60,7 +63,7 @@ public class JsoupMovieController {
         //获取电影列表
         Elements table = div.select("table");//查找table标签
         //获取电影列表总数
-        int result=table.size();
+        int result = table.size();
         //System.out.println("电影列表数为:"+result);
         for (Element tb : table) {
             try {
@@ -72,10 +75,10 @@ public class JsoupMovieController {
             Elements tr = tb.select("tr");
             //System.out.println(tr.size());
             //获取电影列表链接和标题
-            String videos=tr.get(1).select("a").attr("abs:href");
-            System.out.println(tr.get(1).select("a").attr("abs:href")+"\t"+tr.get(1).select("a").text());
+            String videos = tr.get(1).select("a").attr("abs:href");
+            System.out.println(tr.get(1).select("a").attr("abs:href") + "\t" + tr.get(1).select("a").text());
             //这里要跳过这个首页页面 否则会抛出异常
-            if ("http://www.dytt8.net/html/gndy/jddy/index.html".equals(videos))continue;
+            if ("http://www.dytt8.net/html/gndy/jddy/index.html".equals(videos)) continue;
             //进如电影列表详情页面
             doc = Jsoup.connect(videos).userAgent("Mozilla").get();
             //获取到电影详情页面所在的节点
@@ -85,7 +88,7 @@ public class JsoupMovieController {
             //System.out.println(div1.select("p").text());
             //获取封面图地址
             Elements select = div1.select("img[src$=.jpg]");
-            String imgUrl=select.get(0).attr("abs:src");
+            String imgUrl = select.get(0).attr("abs:src");
             System.out.println(imgUrl);
             //获取下载地址
             System.out.println(div1.select("td").text());
@@ -106,9 +109,12 @@ public class JsoupMovieController {
     @RequestMapping("evenBus")
     public String evenBus(Integer integer) throws IOException {
         List<GdOrderMerch> list = Lists.newArrayList();
-        for(int i=0;i<30000;i++){
+        for (int i = 0; i < 30000; i++) {
             list.add(GdOrderMerch.builder().id(i).gdsName("asdfasfdasfdadfsasdf").gmtCreate(new Date()).build());
         }
+        Predicate<GdOrderMerch> p1 = i -> i.getId() > 5;
+        Predicate<GdOrderMerch> p2 = i -> i.getId() < 20;
+        list.stream().filter(p1.and(p2)).collect(Collectors.toList());
         asynEventBus.post(11111);
         System.out.println("触发通知");
         return "111111";
@@ -132,11 +138,20 @@ public class JsoupMovieController {
     @Subscribe
     public void listerTwo(GdOrderMerch integer) {
         System.out.printf("这个是不想你走的 的 ");
-        if(SyUtil.isEmpty(integer)){
+        if (SyUtil.isEmpty(integer)) {
             System.out.printf("在这终止");
             Thread.currentThread().isInterrupted();
-        };
+        }
+        ;
         System.out.printf("这就不会走了");
 
+    }
+
+    public static void main(String[] str){
+        Function<Integer, Integer> f = x -> x + 1;
+        Function<Integer, Integer> g = x -> x * 2;
+        Function<Integer, Integer> h = f.compose(g);
+        int result = h.apply(6);
+        System.out.println(result);
     }
 }
