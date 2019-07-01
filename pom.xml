@@ -20,6 +20,7 @@
         <module>clean-service</module>
         <module>web-service</module>
         <module>core-service</module>
+        <module>jsoup-service</module>
     </modules>
 
     <properties>
